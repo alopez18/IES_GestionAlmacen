@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionAlmacen", "GestionAlmacen\GestionAlmacen.csproj", "{3B7E20B7-D982-4613-9EBB-03B680EF9EAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B7E20B7-D982-4613-9EBB-03B680EF9EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B7E20B7-D982-4613-9EBB-03B680EF9EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B7E20B7-D982-4613-9EBB-03B680EF9EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B7E20B7-D982-4613-9EBB-03B680EF9EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C53F812-88D6-40E2-9F4E-C88FEE6E35D1}
+	EndGlobalSection
+EndGlobal
