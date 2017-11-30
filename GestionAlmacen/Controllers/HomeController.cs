@@ -4,9 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace GestionAlmacen.Controllers {
+namespace ALC.IES.GestionAlmacen.Controllers {
     public class HomeController : Controller {
         public ActionResult Index() {
+
             return View();
         }
 

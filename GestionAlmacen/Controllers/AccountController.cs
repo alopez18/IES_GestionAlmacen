@@ -8,9 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using GestionAlmacen.Models;
+using ALC.IES.GestionAlmacen.Models;
 
-namespace GestionAlmacen.Controllers
+namespace ALC.IES.GestionAlmacen.Controllers
 {
     [Authorize]
     public class AccountController : Controller

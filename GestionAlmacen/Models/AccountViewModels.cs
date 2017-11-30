@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace GestionAlmacen.Models
+namespace ALC.IES.GestionAlmacen.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

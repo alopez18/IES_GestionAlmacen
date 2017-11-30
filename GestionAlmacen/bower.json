@@ -1,0 +1,21 @@
+{
+  "name": "GestionAlmacen",
+  "homepage": "https://github.com/alopez18/IES_GestionAlmacen",
+  "authors": [
+    "alopez18 <aitorlopez84@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "simple-line-icons": "2.4.1",
+    "animateCSS": "v1.1.5"
+  }
+}

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace GestionAlmacen.Models
+namespace ALC.IES.GestionAlmacen.Models
 {
     public class IndexViewModel
     {
