@@ -1,0 +1,58 @@
+﻿@model  List<ALC.IES.GestionAlmacen.Models.PCAModel>
+@{
+    Layout = "";
+}
+
+@foreach (var pca in Model) {
+    <tr draggable="true" class="trDraggable" data-id="@pca.Id">
+        @*<td>
+                <div class="checkbox c-checkbox">
+                    <label>
+                        <input type="checkbox">
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </td>*@
+        <td align="center">
+            @if (pca.Usuarios != null && pca.Usuarios.Count > 0) {
+                <i class="fa fa-user" aria-hidden="true" title="@(String.Join(", ", pca.Usuarios))"></i>
+            } else {
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+            }
+        </td>
+        <td>
+            @pca.Id
+        </td>
+        <td>
+            @pca.FechaEntrega.ToShortDateString()
+        </td>
+        <td>
+            @pca.Almacen.ToString().PadLeft(3, '0')
+        </td>
+        <td style="white-space:nowrap;">
+            @pca.Proveedor
+        </td>
+        <td>
+            @pca.Escandallo
+        </td>
+        <td>
+            @String.Format("{0} / {1}", pca.PickingsActual, pca.PickingsTotal)
+        </td>
+        <td>
+            @(Html.Raw(pca.Alarma ? "<span class=\"fa fa-exclamation-triangle\" style=\"color:#f05050;\"></span>" : "&nbsp;"))
+        </td>
+        @*<td>
+                <div class="media-box">
+                    <a href="#" class="pull-left">
+                        <img src="/Content/Images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64">
+                    </a>
+                    <div class="media-box-body">
+                        <div class="pull-right btn btn-info btn-sm">View</div>
+                        <h4 class="media-box-heading">Product 1</h4>
+                        <small class="text-muted">Category1, Category2</small>
+                        <p>Sed gravida auctor odio. Sed viverra rutrum hendrerit. Praesent dapibus justo dolor. Suspendisse rhoncus consectetur eros vehicula accumsan.</p>
+                    </div>
+                </div>
+            </td>*@
+    </tr>
+}

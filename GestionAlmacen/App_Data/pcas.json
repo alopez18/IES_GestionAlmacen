@@ -9,9 +9,7 @@
     "PickingsActual": 2,
     "Alarma": false,
     "CBLoMosca": true,
-    "Usuarios": [
-      "Esther"
-    ]
+    "Usuarios": []
   },
   {
     "Id": 784563,
@@ -37,7 +35,9 @@
     "PickingsActual": 0,
     "Alarma": true,
     "CBLoMosca": true,
-    "Usuarios": []
+    "Usuarios": [
+      null
+    ]
   },
   {
     "Id": 639854,
@@ -49,7 +49,9 @@
     "PickingsActual": 3,
     "Alarma": false,
     "CBLoMosca": false,
-    "Usuarios": []
+    "Usuarios": [
+      "Mª Dolores"
+    ]
   },
   {
     "Id": 639854,

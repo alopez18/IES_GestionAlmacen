@@ -1,47 +1,44 @@
 ﻿[
   {
     "Id": 1,
-    "NombreUsuario": null,
-    "PCAs": []
-  },
-  {
-    "Id": 2,
-    "NombreUsuario": "Esther",
+    "NombreUsuario": "Mª Dolores",
     "PCAs": [
       {
-        "Id": 145789,
-        "FechaEntrega": "2017-11-14T00:00:00",
-        "Almacen": 2,
+        "Id": 639854,
+        "FechaEntrega": "2017-11-03T00:00:00",
+        "Almacen": 3,
         "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
-        "Escandallo": 486321,
-        "PickingsTotal": 14,
-        "PickingsActual": 2,
+        "Escandallo": 568974,
+        "PickingsTotal": 7,
+        "PickingsActual": 3,
         "Alarma": false,
-        "CBLoMosca": true,
-        "Usuarios": [
-          "Esther"
-        ]
-      },
-      {
-        "Id": 784563,
-        "FechaEntrega": "2017-12-01T00:00:00",
-        "Almacen": 2,
-        "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
-        "Escandallo": 458963,
-        "PickingsTotal": 10,
-        "PickingsActual": 5,
-        "Alarma": false,
-        "CBLoMosca": true,
-        "Usuarios": [
-          "Muñoz"
-        ]
+        "CBLoMosca": false,
+        "Usuarios": []
       }
     ]
   },
   {
-    "Id": 3,
+    "Id": 2,
     "NombreUsuario": null,
     "PCAs": []
+  },
+  {
+    "Id": 3,
+    "NombreUsuario": "Miguel",
+    "PCAs": [
+      {
+        "Id": 235487,
+        "FechaEntrega": "2017-11-08T00:00:00",
+        "Almacen": 5,
+        "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
+        "Escandallo": 985762,
+        "PickingsTotal": 12,
+        "PickingsActual": 0,
+        "Alarma": true,
+        "CBLoMosca": true,
+        "Usuarios": []
+      }
+    ]
   },
   {
     "Id": 4,
@@ -60,18 +57,6 @@
         "Usuarios": [
           "Sonia"
         ]
-      },
-      {
-        "Id": 639854,
-        "FechaEntrega": "2017-11-03T00:00:00",
-        "Almacen": 3,
-        "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
-        "Escandallo": 568974,
-        "PickingsTotal": 7,
-        "PickingsActual": 3,
-        "Alarma": false,
-        "CBLoMosca": false,
-        "Usuarios": []
       }
     ]
   },
@@ -112,18 +97,6 @@
         "Usuarios": [
           "Muñoz"
         ]
-      },
-      {
-        "Id": 235487,
-        "FechaEntrega": "2017-11-08T00:00:00",
-        "Almacen": 5,
-        "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
-        "Escandallo": 985762,
-        "PickingsTotal": 12,
-        "PickingsActual": 0,
-        "Alarma": true,
-        "CBLoMosca": true,
-        "Usuarios": []
       }
     ]
   },

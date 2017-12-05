@@ -12,7 +12,12 @@ namespace ALC.IES.GestionAlmacen.Hubs {
         public void ActivarTerminal(int idTerminal, String usuario) {
             var context = GlobalHost.ConnectionManager.GetHubContext<TerminalesHub>();
             context.Clients.All.activarTerminal(idTerminal, usuario);
+            //Clients.All.activarTerminal(idTerminal, usuario);
+        }
 
+        public void DesactivarTerminal(int idTerminal) {
+            var context = GlobalHost.ConnectionManager.GetHubContext<TerminalesHub>();
+            context.Clients.All.desactivarTerminal(idTerminal);
             //Clients.All.activarTerminal(idTerminal, usuario);
         }
 
@@ -23,7 +28,7 @@ namespace ALC.IES.GestionAlmacen.Hubs {
             //Clients.All.activarTerminal(idTerminal, usuario);
         }
 
-        
+
 
 
 

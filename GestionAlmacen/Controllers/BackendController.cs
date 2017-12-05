@@ -8,10 +8,35 @@ namespace ALC.IES.GestionAlmacen.Controllers {
     public class BackendController : BaseController {
         // GET: Backend
         public ActionResult Index() {
-
-            return View();
+            Models.BackendModel model = new Models.BackendModel();
+            return View(model);
         }
 
+        public  JsonResult DesactivarTerminal(int id) {
+            DTO.DtoAjaxReturn res = new DTO.DtoAjaxReturn();
+
+            //Actualizamos los terminales
+            List<Models.TerminalGestionModel> models = cls.DatosUtils.GetTerminales();
+            String sAuxUsuario = models[id - 1].NombreUsuario;
+            models[id - 1].NombreUsuario = null;
+            models[id - 1].PCAs.Clear();
+            cls.DatosUtils.SetTerminales(models);
+
+            //Actualizamos los pcas
+            List<Models.PCAModel> pcas = cls.DatosUtils.GetPCAs();
+            foreach (Models.PCAModel pca in pcas) {
+                pca.Usuarios.Remove(sAuxUsuario);
+            }
+            cls.DatosUtils.SetPCAs(pcas);
+
+            //Informamos a los hubs del cambio
+            Hubs.TerminalesHub hub = new Hubs.TerminalesHub();
+            hub.DesactivarTerminal(id);
+
+            //Devolvemos resultado
+            res.Success = true;
+            return Json(res);
+        }
 
         public JsonResult ActivarTerminal(int terminal, String usuario) {
             DTO.DtoAjaxReturn res = new DTO.DtoAjaxReturn();
@@ -20,6 +45,18 @@ namespace ALC.IES.GestionAlmacen.Controllers {
             models[terminal - 1].NombreUsuario = usuario;
             cls.DatosUtils.SetTerminales(models);
 
+            //Si el terminal tenia algún pca asignado, al activar el terminal lo activamos en el pca.
+            if (models[terminal-1].PCAs!=null&& models[terminal - 1].PCAs.Count>0) {                 
+                List<Models.PCAModel> pcas = cls.DatosUtils.GetPCAs();
+                foreach (var pca in pcas) {
+                    foreach (var pcaT in models[terminal - 1].PCAs) {
+                        if (pca.Id==pcaT.Id) {
+                            pca.Usuarios.Add(models[terminal - 1].NombreUsuario);
+                        }
+                    }
+                }
+                cls.DatosUtils.SetPCAs(pcas);
+            }
 
             Hubs.TerminalesHub hub = new Hubs.TerminalesHub();
             hub.ActivarTerminal(terminal, usuario);
@@ -38,6 +75,7 @@ namespace ALC.IES.GestionAlmacen.Controllers {
             cls.DatosUtils.SetTerminales(models);
 
             pcaModel.Usuarios.Add(models[terminal - 1].NombreUsuario);
+            cls.DatosUtils.SetPCAs(pcaModels);
 
             Hubs.TerminalesHub hub = new Hubs.TerminalesHub();
 

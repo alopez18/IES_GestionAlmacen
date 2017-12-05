@@ -209,6 +209,7 @@
     <Compile Include="Hubs\TerminalesHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AlmacenGestionModel.cs" />
+    <Compile Include="Models\BackendModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PCAModel.cs" />
@@ -452,6 +453,7 @@
     <Content Include="Content\app\css\theme-b.css" />
     <Content Include="Content\app\css\theme-c.css" />
     <Content Include="Content\app\css\theme-d.css" />
+    <Content Include="Content\app\css\theme-intersport.css" />
     <Content Include="Content\app\css\theme-e.css" />
     <Content Include="Content\app\css\theme-f.css" />
     <Content Include="Content\app\css\theme-g.css" />
@@ -502,6 +504,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="js\almacen.js" />
     <Content Include="Scripts\app\app.init.js" />
     <Content Include="bower.json" />
     <Content Include="bower_components\simple-line-icons\.bower.json" />
@@ -710,6 +713,7 @@
     <Content Include="Views\Almacen\Index.cshtml" />
     <Content Include="Views\Backend\Index.cshtml" />
     <Content Include="Views\Almacen\_pcaEnTerminal.cshtml" />
+    <Content Include="Views\Almacen\_cuerpoTablaPCAs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
