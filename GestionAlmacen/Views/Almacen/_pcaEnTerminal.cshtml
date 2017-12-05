@@ -1,0 +1,22 @@
+﻿@model ALC.IES.GestionAlmacen.Models.PCAModel
+@{ 
+    Layout = "";
+}
+<div class="list-group-item ">
+    <div class="media-box">
+        <div class="media-box-body clearfix">
+            <small class="pull-right">
+                <a href="#" class="aDelPCA"><i class="fa fa-trash-o"></i></a>
+            </small>
+            <strong class="media-box-heading text-primary">
+                <span class="circle circle-success circle-lg text-left"></span> @Model.Id
+            </strong>
+            <p class="mb-sm">
+                <small>Lin.0/19 - Ud.  @(String.Format("{0}/{1}", Model.PickingsActual, Model.PickingsTotal))</small>
+                <small class="pull-right" draggable="false">
+                    @(Model.CBLoMosca ? "CBL" : "MOSCA")
+                </small>
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,304 @@
+﻿@model ALC.IES.GestionAlmacen.Models.AlmacenGestionModel
+
+@{
+    ViewBag.Title = "Gestión almacén";
+}
+@*<h3>
+        Gestión terminales
+        <small>Subtitle</small>
+    </h3>*@
+<div class="row">
+    <div class="col-xs-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="#" data-tool="panel-refresh" data-toggle="tooltip" title="Actualizar" class="pull-right" data-original-title="Actualizar">
+                    <em class="fa fa-refresh"></em>
+                </a>
+                Filtros
+            </div>
+            <!-- START table-responsive-->
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            @*<th data-check-all="">
+                                    <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox" data-original-title="" title="">
+                                        <label>
+                                            <input type="checkbox">
+                                            <span class="fa fa-check"></span>
+                                        </label>
+                                    </div>
+                                </th>*@
+                            <th><span class="fa fa-user-circle"></span></th>
+                            <th>PCA</th>
+                            <th>Fecha entrega</th>
+                            <th>Alm.</th>
+                            <th>Proveedor</th>
+                            <th>Escandallo</th>
+                            <th>Pick.</th>
+                            <th><span class="fa fa-exclamation-triangle"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pca in Model.PCAs) {
+                            <tr draggable="true" class="trDraggable" data-id="@pca.Id">
+                                @*<td>
+                                        <div class="checkbox c-checkbox">
+                                            <label>
+                                                <input type="checkbox">
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                        </div>
+                                    </td>*@
+                                <td align="center">
+                                    @if (pca.Usuarios != null && pca.Usuarios.Count > 0) {
+                                        <i class="fa fa-user" aria-hidden="true" title="@(String.Join(", ", pca.Usuarios))"></i>
+                                    } else {
+                                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                                    }
+                                </td>
+                                <td>
+                                    @pca.Id
+                                </td>
+                                <td>
+                                    @pca.FechaEntrega.ToShortDateString()
+                                </td>
+                                <td>
+                                    @pca.Almacen.ToString().PadLeft(3, '0')
+                                </td>
+                                <td style="white-space:nowrap;">
+                                    @pca.Proveedor
+                                </td>
+                                <td>
+                                    @pca.Escandallo
+                                </td>
+                                <td>
+                                    @String.Format("{0} / {1}", pca.PickingsActual, pca.PickingsTotal)
+                                </td>
+                                <td>
+                                    @(Html.Raw(pca.Alarma ? "<span class=\"fa fa-exclamation-triangle\" style=\"color:#f05050;\"></span>" : "&nbsp;"))
+                                </td>
+                                @*<td>
+                                        <div class="media-box">
+                                            <a href="#" class="pull-left">
+                                                <img src="/Content/Images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64">
+                                            </a>
+                                            <div class="media-box-body">
+                                                <div class="pull-right btn btn-info btn-sm">View</div>
+                                                <h4 class="media-box-heading">Product 1</h4>
+                                                <small class="text-muted">Category1, Category2</small>
+                                                <p>Sed gravida auctor odio. Sed viverra rutrum hendrerit. Praesent dapibus justo dolor. Suspendisse rhoncus consectetur eros vehicula accumsan.</p>
+                                            </div>
+                                        </div>
+                                    </td>*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- END table-responsive-->
+            @*<div class="panel-footer">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <button class="btn btn-sm btn-default">Clear</button>
+                        </div>
+                        <div class="col-lg-8"></div>
+                        <div class="col-lg-2 text-right">
+                            <ul class="pagination pagination-sm">
+                                <li class="active">
+                                    <a href="#">1</a>
+                                </li>
+                                <li>
+                                    <a href="#">2</a>
+                                </li>
+                                <li>
+                                    <a href="#">3</a>
+                                </li>
+                                <li>
+                                    <a href="#">Â»</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+    <div class="col-xs-8">
+        <div class="row">
+            @foreach (var terminal in Model.Terminales) {
+                <div class="col-sm-15">
+                    <div data-id="@terminal.Id" id="t@(terminal.Id)" class="listDroppable panel panel-info @(String.IsNullOrEmpty(terminal.NombreUsuario) ? "disabled" : "")" style="position:relative;">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <i class="fa fa-calculator"></i>
+                                Term-@(terminal.Id)
+                            </div>
+                        </div>
+                        <!-- START list group-->
+                        <div data-height="230" data-scrollable="" class="list-group list-scrollable">
+                            @foreach (var pca in terminal.PCAs) {
+                                <text>@Html.Partial("_pcaEnTerminal", pca)</text>
+                            }
+                        </div>
+                        <!-- END list group-->
+                        <!-- START panel footer-->
+                        <div class="panel-footer clearfix">
+                            <i class="fa fa-user-circle @(String.IsNullOrEmpty(terminal.NombreUsuario)?"hide":"")"></i>
+                            <span>
+                                @(Html.Raw(!String.IsNullOrEmpty(terminal.NombreUsuario) ? terminal.NombreUsuario : "&nbsp;"))
+                            </span>
+                            @*<div class="input-group">
+                                    <input type="text" placeholder="Search message .." class="form-control input-sm">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default btn-sm">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Styles {
+
+}
+
+
+@section Scripts {
+    <!--Reference the SignalR library. -->
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
+
+    <!--SignalR script to update the chat page and send messages.-->
+    <script>
+        $(function () {
+            if (!Modernizr.draganddrop) {
+                alert("El navegador no soporta el sistema de arrastrado.")
+            }
+
+
+            // Reference the auto-generated proxy for the hub.
+            var terminales = $.connection.terminalesHub;
+            console.log($.connection);
+            // Create a function that the hub can call back to display messages.
+            terminales.client.activarTerminal = function (id, user) {
+                var $terminal = $("#t" + id);
+                $terminal.removeClass("disabled");
+                $(".panel-footer > i", $terminal).removeClass("hide");
+                $(".panel-footer > span", $terminal).text(user); //.removeClass("hide");
+                console.log("activamos el terminal " + id + "con el usuario " + user);
+            };
+
+            terminales.client.setPCA2Terminal = function (idPCA, idTerminal, model) {
+                var $terminal = $("#t" + idTerminal);
+                $(".list-scrollable", $terminal).append(model);
+            };
+
+
+
+            //// Get the user name and store it to prepend to messages.
+            //$('#displayname').val(prompt('Enter your name:', ''));
+            //// Set initial focus to message input box.
+            //$('#message').focus();
+
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                //$('#sendmessage').click(function () {
+                //    // Call the Send method on the hub.
+                //    chat.server.send($('#displayname').val(), $('#message').val());
+                //    // Clear text box and reset focus for next comment.
+                //    $('#message').val('').focus();
+                //});
+            });
+
+            var elementDragging = null;
+            $(".trDraggable").on("dragstart", function (e) {
+                var $this = $(this);
+                $this.css("opacity", "0.4");
+                elementDragging = $this;
+
+                $(".list-scrollable").hide();
+
+                $(".listDroppable").addClass("dropping");
+            });
+            $(".trDraggable").on("dragend", function (e) {
+                $(this).css("opacity", "1");
+                $(".list-scrollable").show();
+                $(".listDroppable").removeClass("dropping");
+            });
+
+
+            $(".listDroppable").on("dragenter", function (e) {
+                var $this = $(this);
+                $(".panel.listDroppable").addClass("notOver");
+                $this.addClass("over");
+            });
+
+
+            $(".listDroppable").on("dragover", function (e) {
+                if (e.preventDefault) {
+                    e.preventDefault(); // Necessary. Allows us to drop.
+                }
+                //e.dataTransfer.dropEffect = 'move';
+                return false;
+            });
+
+
+            $(".listDroppable").on("dragleave", function (e) {
+                $(".panel.listDroppable").removeClass("notOver");
+                var $this = $(this);
+                $this.removeClass("over");
+            });
+
+            $(".listDroppable").on("drop", function (e) {
+                $(".panel.listDroppable").removeClass("notOver");
+                var $this = $(this);
+                $this.removeClass("over");
+
+                if (e.stopPropagation) {
+                    e.stopPropagation(); // stops the browser from redirecting.
+                }
+                console.log(e);
+                console.log($this);
+
+                console.log(elementDragging);
+
+
+                //alert("PCA con id " + elementDragging.data("id") + " arrastrado al terminal " + $this.data("id"));
+
+                var datos = { pca: parseInt(elementDragging.data("id")), terminal: parseInt($this.data("id")) };
+
+
+                $.ajax({
+                    method: "POST",
+                    url: "/backend/SetPCA2Terminal",
+                    data: datos,
+                    success: function (data) {
+                        if (!data.Success) {
+                            alert("Ha fallado!")
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+
+                return false;
+
+            });
+
+        });
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div/>').text(value).html();
+            return encodedValue;
+        }
+    </script>
+
+}
