@@ -36,7 +36,9 @@
     "Alarma": true,
     "CBLoMosca": true,
     "Usuarios": [
-      null
+      null,
+      "Sonia",
+      "Miguel"
     ]
   },
   {

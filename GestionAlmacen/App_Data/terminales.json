@@ -37,6 +37,21 @@
         "Alarma": true,
         "CBLoMosca": true,
         "Usuarios": []
+      },
+      {
+        "Id": 235487,
+        "FechaEntrega": "2017-11-08T00:00:00",
+        "Almacen": 5,
+        "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
+        "Escandallo": 985762,
+        "PickingsTotal": 12,
+        "PickingsActual": 0,
+        "Alarma": true,
+        "CBLoMosca": true,
+        "Usuarios": [
+          null,
+          "Sonia"
+        ]
       }
     ]
   },
@@ -56,6 +71,20 @@
         "CBLoMosca": false,
         "Usuarios": [
           "Sonia"
+        ]
+      },
+      {
+        "Id": 235487,
+        "FechaEntrega": "2017-11-08T00:00:00",
+        "Almacen": 5,
+        "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
+        "Escandallo": 985762,
+        "PickingsTotal": 12,
+        "PickingsActual": 0,
+        "Alarma": true,
+        "CBLoMosca": true,
+        "Usuarios": [
+          null
         ]
       }
     ]
