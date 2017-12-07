@@ -5,8 +5,8 @@ using System.Web;
 
 namespace ALC.IES.GestionAlmacen.Models {
     public class BackendModel {
-        public List<Models.PCAModel> PCAs { get; set; }
-        public List<Models.TerminalGestionModel> Terminales { get; set; }
+        public List<cls.PCA> PCAs { get; set; }
+        public List<cls.TerminalGestion> Terminales { get; set; }
 
         public List<String> UsersLibres { get; set; }
 

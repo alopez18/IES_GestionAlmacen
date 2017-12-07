@@ -6,8 +6,8 @@ using System.Web;
 namespace ALC.IES.GestionAlmacen.Models {
     public class AlmacenGestionModel {
 
-        public List<Models.PCAModel> PCAs { get; set; }
-        public List<TerminalGestionModel> Terminales { get; set; }
+        public List<cls.PCA> PCAs { get; set; }
+        public List<cls.TerminalGestion> Terminales { get; set; }
 
         public AlmacenGestionModel() {
 
@@ -25,17 +25,15 @@ namespace ALC.IES.GestionAlmacen.Models {
             Random rUsuarios = new Random(rPCA.Next(100000, 999999));
             Random rTerminales = new Random(rPCA.Next(100000, 999999));
 
-            this.PCAs = new List<PCAModel>();
+            this.PCAs = new List<cls.PCA>();
             int l = rPCA.Next(3, 15);
             for (int i = 0; i < l; i++) {
-                PCAModel modelPcaAux = new PCAModel() {
+                cls.PCA modelPcaAux = new cls.PCA() {
                     Alarma = (rPCA.Next() % 2 == 0),
                     Almacen = rPCA.Next(1, 15),
                     Escandallo = rPCA.Next(100000, 999999),
                     FechaEntrega = new DateTime(2017, 11, 10),
                     Id = rPCA.Next(1000, 9999),
-                    PickingsActual = rPCA.Next(0, 5),
-                    PickingsTotal = rPCA.Next(6, 20),
                     Proveedor = "CONVERSE NETHERLANDS BV BELGICA",
                     Usuarios = new List<string>(),
                     CBLoMosca = (rPCA.Next() % 2 == 0)
@@ -54,7 +52,7 @@ namespace ALC.IES.GestionAlmacen.Models {
             /*
              * Así conseguimos los usuarios que están en algún pca.
              */
-            this.Terminales = new List<TerminalGestionModel>();
+            this.Terminales = new List<cls.TerminalGestion>();
             List<String> UsuariosAsignados = new List<string>();
             foreach (var item in this.PCAs) {
                 foreach (var item2 in item.Usuarios) {
@@ -66,13 +64,13 @@ namespace ALC.IES.GestionAlmacen.Models {
 
             for (int i = 0; i < 15; i++) {
                 int countPca = rTerminales.Next(0, l);
-                TerminalGestionModel tModelAux = new TerminalGestionModel() {
+                cls.TerminalGestion tModelAux = new cls.TerminalGestion() {
                     Id = i + 1
                 };
 
                 if (UsuariosAsignados.Count > i) {
                     tModelAux.NombreUsuario = UsuariosAsignados[i];
-                    List<PCAModel> pcasUsuario = this.PCAs.Where(m => m.Usuarios.Contains(UsuariosAsignados[i])).ToList();
+                    List<cls.PCA> pcasUsuario = this.PCAs.Where(m => m.Usuarios.Contains(UsuariosAsignados[i])).ToList();
                     tModelAux.PCAs = pcasUsuario;
                 }
 

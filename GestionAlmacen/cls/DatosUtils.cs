@@ -19,30 +19,30 @@ namespace ALC.IES.GestionAlmacen.cls {
 
 
 
-        public static List<Models.PCAModel> GetPCAs() {
+        public static List<cls.PCA> GetPCAs() {
             String path = HttpContext.Current.Server.MapPath(String.Format("~/App_Data/{0}", _pcasFileName));
             String ser = File.ReadAllText(path, Encoding.UTF8);
-            List<Models.PCAModel> res = JsonConvert.DeserializeObject<List<Models.PCAModel>>(ser);
+            List<cls.PCA> res = JsonConvert.DeserializeObject<List<cls.PCA>>(ser);
             return res;
         }
 
 
-        public static void SetPCAs(List<Models.PCAModel> model) {
+        public static void SetPCAs(List<cls.PCA> model) {
             String path = HttpContext.Current.Server.MapPath(String.Format("~/App_Data/{0}", _pcasFileName));
             String ser = JsonConvert.SerializeObject(model, Formatting.Indented);
             File.WriteAllText(path, ser, Encoding.UTF8);
         }
 
-        internal static void SetTerminales(List<TerminalGestionModel> tModels) {
+        internal static void SetTerminales(List<cls.TerminalGestion> tModels) {
             String path = HttpContext.Current.Server.MapPath(String.Format("~/App_Data/{0}", _terminalesFileName));
             String ser = JsonConvert.SerializeObject(tModels, Formatting.Indented);
             File.WriteAllText(path, ser, Encoding.UTF8);
         }
 
-        public static List<TerminalGestionModel> GetTerminales() {
+        public static List<cls.TerminalGestion> GetTerminales() {
             String path = HttpContext.Current.Server.MapPath(String.Format("~/App_Data/{0}", _terminalesFileName));
             String ser = File.ReadAllText(path, Encoding.UTF8);
-            List<TerminalGestionModel> res = JsonConvert.DeserializeObject<List<TerminalGestionModel>>(ser);
+            List<cls.TerminalGestion> res = JsonConvert.DeserializeObject<List<cls.TerminalGestion>>(ser);
             return res;
         }
     }//Class Finish

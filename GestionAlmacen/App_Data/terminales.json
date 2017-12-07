@@ -1,59 +1,84 @@
 ﻿[
   {
     "Id": 1,
-    "NombreUsuario": "Mª Dolores",
-    "PCAs": [
-      {
-        "Id": 639854,
-        "FechaEntrega": "2017-11-03T00:00:00",
-        "Almacen": 3,
-        "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
-        "Escandallo": 568974,
-        "PickingsTotal": 7,
-        "PickingsActual": 3,
-        "Alarma": false,
-        "CBLoMosca": false,
-        "Usuarios": []
-      }
-    ]
-  },
-  {
-    "Id": 2,
     "NombreUsuario": null,
     "PCAs": []
   },
   {
-    "Id": 3,
-    "NombreUsuario": "Miguel",
+    "Id": 2,
+    "NombreUsuario": "Esther",
     "PCAs": [
       {
-        "Id": 235487,
-        "FechaEntrega": "2017-11-08T00:00:00",
-        "Almacen": 5,
+        "Id": 145789,
+        "FechaEntrega": "2017-11-14T00:00:00",
+        "Almacen": 2,
         "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
-        "Escandallo": 985762,
-        "PickingsTotal": 12,
-        "PickingsActual": 0,
-        "Alarma": true,
-        "CBLoMosca": true,
-        "Usuarios": []
-      },
-      {
-        "Id": 235487,
-        "FechaEntrega": "2017-11-08T00:00:00",
-        "Almacen": 5,
-        "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
-        "Escandallo": 985762,
-        "PickingsTotal": 12,
-        "PickingsActual": 0,
-        "Alarma": true,
+        "Escandallo": 486321,
+        "Alarma": false,
         "CBLoMosca": true,
         "Usuarios": [
-          null,
-          "Sonia"
+          "Esther"
+        ],
+        "Pickings": [
+          [
+            {
+              "Producto": "Zapatillas Nike",
+              "Cantidad": 2,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Sudadera ASICS",
+              "Cantidad": 1,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Calcetines adidas",
+              "Cantidad": 3,
+              "Recogidos": 0
+            }
+          ],
+          [
+            {
+              "Producto": "Zapatillas Nike",
+              "Cantidad": 2,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Sudadera ASICS",
+              "Cantidad": 1,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Calcetines adidas",
+              "Cantidad": 3,
+              "Recogidos": 0
+            }
+          ],
+          [
+            {
+              "Producto": "Zapatillas Nike",
+              "Cantidad": 2,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Sudadera ASICS",
+              "Cantidad": 1,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Calcetines adidas",
+              "Cantidad": 3,
+              "Recogidos": 0
+            }
+          ]
         ]
       }
     ]
+  },
+  {
+    "Id": 3,
+    "NombreUsuario": null,
+    "PCAs": []
   },
   {
     "Id": 4,
@@ -65,26 +90,29 @@
         "Almacen": 3,
         "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
         "Escandallo": 589563,
-        "PickingsTotal": 9,
-        "PickingsActual": 6,
         "Alarma": true,
         "CBLoMosca": false,
         "Usuarios": [
           "Sonia"
-        ]
-      },
-      {
-        "Id": 235487,
-        "FechaEntrega": "2017-11-08T00:00:00",
-        "Almacen": 5,
-        "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
-        "Escandallo": 985762,
-        "PickingsTotal": 12,
-        "PickingsActual": 0,
-        "Alarma": true,
-        "CBLoMosca": true,
-        "Usuarios": [
-          null
+        ],
+        "Pickings": [
+          [
+            {
+              "Producto": "Zapatillas Padel ASICS",
+              "Cantidad": 2,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Camiseta NIKE",
+              "Cantidad": 1,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Calcetines Trango",
+              "Cantidad": 3,
+              "Recogidos": 0
+            }
+          ]
         ]
       }
     ]
@@ -119,12 +147,34 @@
         "Almacen": 2,
         "Proveedor": "CONVERSE NETHERLANDS BV BELGICA",
         "Escandallo": 458963,
-        "PickingsTotal": 10,
-        "PickingsActual": 5,
         "Alarma": false,
         "CBLoMosca": true,
         "Usuarios": [
           "Muñoz"
+        ],
+        "Pickings": [
+          [
+            {
+              "Producto": "Zapatillas Padel ASICS",
+              "Cantidad": 2,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Sudadera NIKE",
+              "Cantidad": 1,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Calcetines adidas",
+              "Cantidad": 3,
+              "Recogidos": 0
+            },
+            {
+              "Producto": "Gorra Under Armour",
+              "Cantidad": 1,
+              "Recogidos": 0
+            }
+          ]
         ]
       }
     ]

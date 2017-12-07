@@ -1,4 +1,4 @@
-﻿@model ALC.IES.GestionAlmacen.Models.PCAModel
+﻿@model ALC.IES.GestionAlmacen.cls.PCA
 @{ 
     Layout = "";
 }
@@ -12,7 +12,7 @@
                 <span class="circle circle-success circle-lg text-left"></span> @Model.Id
             </strong>
             <p class="mb-sm">
-                <small>Lin.0/19 - Ud.  @(String.Format("{0}/{1}", Model.PickingsActual, Model.PickingsTotal))</small>
+                <small>Lin. @Model.GetNumLineasCompletadas() / @Model.GetNumLineas() - Ud.  @(String.Format("{0}/{1}", Model.GetRecogidos(), Model.GetCantidad()))</small>
                 <small class="pull-right" draggable="false">
                     @(Model.CBLoMosca ? "CBL" : "MOSCA")
                 </small>

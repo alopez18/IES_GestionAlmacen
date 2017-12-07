@@ -1,10 +1,10 @@
 ﻿@model ALC.IES.GestionAlmacen.Models.BackendModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Backend";
 }
 
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Activar usuario en terminal
@@ -33,13 +33,13 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-9">
         <div class="panel widget">
             <div class="row row-table">
                 @{ int nIndex = 1; }
                 @foreach (var item in Model.Terminales) {
                     bool withUser = !String.IsNullOrWhiteSpace(item.NombreUsuario);
-                    <div class="col-md-15 col-sm-3 hidden-xs pv text-center@((nIndex % 5 != 0)?" br ":"" ) @(withUser?" bg-success ":"") ">
+                    <div class="col-md-15 col-sm-3 hidden-xs pv text-center@((nIndex % 5 != 0)?" br ":"" ) @(withUser?" bg-success ":"") " style="vertical-align: top;">
                         <div class="@(withUser?"":"text-info") text-sm">
                             Term-@(item.Id)
                         </div>
@@ -57,8 +57,22 @@
                             @if (!String.IsNullOrWhiteSpace(item.NombreUsuario)) {
                                 <a data-id="@item.Id" class="pull-right text-white aPowerTerm" href="#"><i class="fa fa-power-off"></i></a>
                             }
-
                         </div>
+                        @foreach (var pca in item.PCAs) {
+                            foreach (var picking in pca.Pickings) {
+                                <div class=" list-group">
+                                    @foreach (var linea in picking) {
+                                        <div class="list-group-item" style="color:#000000; text-align:left;">
+                                            @linea.Producto
+                                            <span class="badge pull-right">
+                                                @linea.Cantidad
+                                            </span>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        }
+
                     </div>
                     if (nIndex % 5 == 0) {
                         <text>@Html.Raw("</div></div> <div class=\"panel widget\"><div class=\"row row-table\">")</text>
@@ -109,7 +123,7 @@
 
                 $.ajax({
                     method: "POST",
-                    url: "/backend/DesactivarTerminal/"+id,
+                    url: "/backend/DesactivarTerminal/" + id,
                     success: function (data) {
                         if (data.Success) {
                             window.location.reload();

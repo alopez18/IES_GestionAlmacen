@@ -4,17 +4,17 @@ using System.Linq;
 using System.Web;
 
 namespace ALC.IES.GestionAlmacen.Models {
-    public class TerminalGestionModel {
-        public int Id { get; set; }
-        public String NombreUsuario { get; set; }
-        public List<Models.PCAModel> PCAs { get; set; }
+    //public class TerminalGestionModel {
+    //    public int Id { get; set; }
+    //    public String NombreUsuario { get; set; }
+    //    public List<cls.PCA> PCAs { get; set; }
 
-        public TerminalGestionModel() {
-            this.PCAs = new List<PCAModel>();
-        }
-
-
+    //    public TerminalGestionModel() {
+    //        this.PCAs = new List<PCAModel>();
+    //    }
 
 
-    }//Class Finish
+
+
+    //}//Class Finish
 }//Namespace Finish

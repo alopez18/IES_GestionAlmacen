@@ -16,15 +16,15 @@ namespace ALC.IES.GestionAlmacen.Controllers {
             DTO.DtoAjaxReturn res = new DTO.DtoAjaxReturn();
 
             //Actualizamos los terminales
-            List<Models.TerminalGestionModel> models = cls.DatosUtils.GetTerminales();
+            List<cls.TerminalGestion> models = cls.DatosUtils.GetTerminales();
             String sAuxUsuario = models[id - 1].NombreUsuario;
             models[id - 1].NombreUsuario = null;
             models[id - 1].PCAs.Clear();
             cls.DatosUtils.SetTerminales(models);
 
             //Actualizamos los pcas
-            List<Models.PCAModel> pcas = cls.DatosUtils.GetPCAs();
-            foreach (Models.PCAModel pca in pcas) {
+            List<cls.PCA> pcas = cls.DatosUtils.GetPCAs();
+            foreach (cls.PCA pca in pcas) {
                 pca.Usuarios.Remove(sAuxUsuario);
             }
             cls.DatosUtils.SetPCAs(pcas);
@@ -41,13 +41,13 @@ namespace ALC.IES.GestionAlmacen.Controllers {
         public JsonResult ActivarTerminal(int terminal, String usuario) {
             DTO.DtoAjaxReturn res = new DTO.DtoAjaxReturn();
 
-            List<Models.TerminalGestionModel> models = cls.DatosUtils.GetTerminales();
+            List<cls.TerminalGestion> models = cls.DatosUtils.GetTerminales();
             models[terminal - 1].NombreUsuario = usuario;
             cls.DatosUtils.SetTerminales(models);
 
             //Si el terminal tenia algún pca asignado, al activar el terminal lo activamos en el pca.
             if (models[terminal-1].PCAs!=null&& models[terminal - 1].PCAs.Count>0) {                 
-                List<Models.PCAModel> pcas = cls.DatosUtils.GetPCAs();
+                List<cls.PCA> pcas = cls.DatosUtils.GetPCAs();
                 foreach (var pca in pcas) {
                     foreach (var pcaT in models[terminal - 1].PCAs) {
                         if (pca.Id==pcaT.Id) {
@@ -67,10 +67,10 @@ namespace ALC.IES.GestionAlmacen.Controllers {
 
         public JsonResult SetPCA2Terminal(int pca, int terminal) {
             DTO.DtoAjaxReturn res = new DTO.DtoAjaxReturn();
-            List<Models.PCAModel> pcaModels = cls.DatosUtils.GetPCAs();
-            Models.PCAModel pcaModel = pcaModels.FirstOrDefault(m => m.Id == pca);
+            List<cls.PCA> pcaModels = cls.DatosUtils.GetPCAs();
+            cls.PCA pcaModel = pcaModels.FirstOrDefault(m => m.Id == pca);
 
-            List<Models.TerminalGestionModel> models = cls.DatosUtils.GetTerminales();
+            List<cls.TerminalGestion> models = cls.DatosUtils.GetTerminales();
             models[terminal - 1].PCAs.Add(pcaModel);
             cls.DatosUtils.SetTerminales(models);
 
@@ -90,89 +90,129 @@ namespace ALC.IES.GestionAlmacen.Controllers {
         public JsonResult RestaurarDatosBase() {
             DTO.DtoAjaxReturn res = new DTO.DtoAjaxReturn(true);
 
-            List<Models.PCAModel> pcaModels = new List<Models.PCAModel>();
-            Models.PCAModel model1 = new Models.PCAModel() {
+            List<cls.PCA> pcaModels = new List<cls.PCA>();
+
+
+            cls.PCA model1 = new cls.PCA() {
                 Alarma = false,
                 Almacen = 2,
                 CBLoMosca = true,
                 Escandallo = 486321,
                 FechaEntrega = new DateTime(2017, 11, 14),
                 Id = 145789,
-                PickingsActual = 2,
-                PickingsTotal = 14,
                 Proveedor = "CONVERSE NETHERLANDS BV BELGICA",
                 Usuarios = new List<string>() {
                               Models.UsuariosModel._Usuarios[4]
-                          }
+                          },
+                 Pickings = new List<cls.Picking>() 
             };
+
+            model1.Pickings.Add(new cls.Picking() {
+                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Nike"},
+                new cls.Linea(){ Cantidad=1, Producto="Sudadera ASICS"},
+                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"}
+            });
+            model1.Pickings.Add(new cls.Picking() {
+                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Nike"},
+                new cls.Linea(){ Cantidad=1, Producto="Sudadera ASICS"},
+                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"}
+            });
+            model1.Pickings.Add(new cls.Picking() {
+                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Nike"},
+                new cls.Linea(){ Cantidad=1, Producto="Sudadera ASICS"},
+                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"}
+            });
+
             pcaModels.Add(model1);
 
-            Models.PCAModel model2 = new Models.PCAModel() {
+            cls.PCA model2 = new cls.PCA() {
                 Alarma = false,
                 Almacen = 2,
                 CBLoMosca = true,
                 Escandallo = 458963,
                 FechaEntrega = new DateTime(2017, 12, 1),
                 Id = 784563,
-                PickingsActual = 5,
-                PickingsTotal = 10,
                 Proveedor = "CONVERSE NETHERLANDS BV BELGICA",
                 Usuarios = new List<string>() {
                               Models.UsuariosModel._Usuarios[1]
-                          }
+                          },
+                Pickings = new List<cls.Picking>()
             };
+            model2.Pickings.Add(new cls.Picking() {
+                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Padel ASICS"},
+                new cls.Linea(){ Cantidad=1, Producto="Sudadera NIKE"},
+                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"},
+                new cls.Linea(){ Cantidad=1, Producto="Gorra Under Armour"}
+            });
+
             pcaModels.Add(model2);
 
-            Models.PCAModel model3 = new Models.PCAModel() {
+            cls.PCA model3 = new cls.PCA() {
                 Alarma = true,
                 Almacen = 5,
                 CBLoMosca = true,
                 Escandallo = 985762,
                 FechaEntrega = new DateTime(2017, 11, 8),
                 Id = 235487,
-                PickingsActual = 0,
-                PickingsTotal = 12,
                 Proveedor = "CONVERSE NETHERLANDS BV BELGICA",
-                Usuarios = new List<string>()
+                Usuarios = new List<string>(),
+                Pickings = new List<cls.Picking>()
             };
+            model3.Pickings.Add(new cls.Picking() {
+                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Padel ASICS"},
+                new cls.Linea(){ Cantidad=1, Producto="Sudadera NIKE"},
+                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"},
+                new cls.Linea(){ Cantidad=1, Producto="Gorra Under Armour"}
+            });
             pcaModels.Add(model3);
 
-            Models.PCAModel model4 = new Models.PCAModel() {
+            cls.PCA model4 = new cls.PCA() {
                 Alarma = false,
                 Almacen = 3,
                 CBLoMosca = false,
                 Escandallo = 568974,
                 FechaEntrega = new DateTime(2017, 11, 3),
                 Id = 639854,
-                PickingsActual = 3,
-                PickingsTotal = 7,
                 Proveedor = "CONVERSE NETHERLANDS BV BELGICA",
-                Usuarios = new List<string>()
+                Usuarios = new List<string>(),
+                Pickings = new List<cls.Picking>()
             };
+            model4.Pickings.Add(new cls.Picking() {
+                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Padel ASICS"},
+                new cls.Linea(){ Cantidad=1, Producto="Sudadera NIKE"},
+                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"},
+                new cls.Linea(){ Cantidad=1, Producto="Gorra Under Armour"}
+            });
             pcaModels.Add(model4);
 
-            Models.PCAModel model5 = new Models.PCAModel() {
+            cls.PCA model5 = new cls.PCA() {
                 Alarma = true,
                 Almacen = 3,
                 CBLoMosca = false,
                 Escandallo = 589563,
                 FechaEntrega = new DateTime(2017, 11, 23),
                 Id = 639854,
-                PickingsActual = 6,
-                PickingsTotal = 9,
                 Proveedor = "CONVERSE NETHERLANDS BV BELGICA",
                 Usuarios = new List<string>() {
                      Models.UsuariosModel._Usuarios[5]
-                }
+                },
+                Pickings = new List<cls.Picking>()
             };
+            model5.Pickings.Add(new cls.Picking() {
+                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Padel ASICS"},
+                new cls.Linea(){ Cantidad=1, Producto="Camiseta NIKE"},
+                new cls.Linea(){ Cantidad=3, Producto="Calcetines Trango"}
+            });
             pcaModels.Add(model5);
             cls.DatosUtils.SetPCAs(pcaModels);
 
+            /*
+             * Terminales
+             */
 
-
-            List<Models.TerminalGestionModel> tModels = new List<Models.TerminalGestionModel>();
+            List<cls.TerminalGestion> tModels = new List<cls.TerminalGestion>();
             for (int i = 1; i <= 15; i++) {
-                Models.TerminalGestionModel tModel = new Models.TerminalGestionModel() {
+                cls.TerminalGestion tModel = new cls.TerminalGestion() {
                     Id = i
                 };
                 tModels.Add(tModel);

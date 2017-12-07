@@ -19,7 +19,7 @@ namespace ALC.IES.GestionAlmacen.Controllers {
 
 
         public ActionResult GetCuerpoPCAs() {
-            List<Models.PCAModel> model = cls.DatosUtils.GetPCAs();
+            List<cls.PCA> model = cls.DatosUtils.GetPCAs();
             return View("_cuerpoTablaPCAs", model);
         }
     }//Class Finish

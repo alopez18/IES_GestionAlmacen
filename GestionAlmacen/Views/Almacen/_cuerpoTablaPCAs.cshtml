@@ -1,4 +1,4 @@
-﻿@model  List<ALC.IES.GestionAlmacen.Models.PCAModel>
+﻿@model  List<ALC.IES.GestionAlmacen.cls.PCA>
 @{
     Layout = "";
 }
@@ -36,7 +36,7 @@
             @pca.Escandallo
         </td>
         <td>
-            @String.Format("{0} / {1}", pca.PickingsActual, pca.PickingsTotal)
+            @String.Format("{0} / {1}", pca.GetNumPickingsCompletados(), pca.Pickings.Count)
         </td>
         <td>
             @(Html.Raw(pca.Alarma ? "<span class=\"fa fa-exclamation-triangle\" style=\"color:#f05050;\"></span>" : "&nbsp;"))
