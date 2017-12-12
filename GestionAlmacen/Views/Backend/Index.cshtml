@@ -62,9 +62,10 @@
                             foreach (var picking in pca.Pickings) {
                                 <div class=" list-group">
                                     @foreach (var linea in picking) {
-                                        <div class="list-group-item" style="color:#000000; text-align:left;">
+                                        <div class="list-group-item" style="color:#000; text-align:left;" data-id="@linea.Id">
+                                            <button data-id="@linea.Id" class="btn btn-default btn-xs btn-pick-linea"><i class="fa fa-hand-grab-o"></i></button>
                                             @linea.Producto
-                                            <span class="badge pull-right">
+                                            <span id="spnCant@(linea.Id)" class="badge pull-right" style="color:#000;">
                                                 @linea.Cantidad
                                             </span>
                                         </div>
@@ -133,8 +134,42 @@
                         console.log(err);
                     }
                 });
-            })
+            });
 
+
+            $(".btn-pick-linea").on("click", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var id = $this.data("id");
+                var $spnCant = $("#spnCant" + id);
+
+                var sCant = $spnCant.text();
+
+                if (parseInt(sCant) > 0) {
+                    $.ajax({
+                        method: "POST",
+                        url: "/backend/PickItemLinea/" + id,
+                        success: function (data) {
+                            if (data.Success) {
+                                //window.location.reload();
+                                var $item = $("#spnCant" + id);
+                                var text = $item.text();
+                                var nCant = parseInt(text);
+                                if (nCant > 0) {
+                                    --nCant;
+                                    $item.text(nCant);
+                                } else {
+                                    //No se puede restar a 0...
+                                }
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            });
         });
+
     </script>
 }

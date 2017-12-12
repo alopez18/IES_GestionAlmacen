@@ -12,7 +12,7 @@ namespace ALC.IES.GestionAlmacen.Controllers {
             return View(model);
         }
 
-        public  JsonResult DesactivarTerminal(int id) {
+        public JsonResult DesactivarTerminal(int id) {
             DTO.DtoAjaxReturn res = new DTO.DtoAjaxReturn();
 
             //Actualizamos los terminales
@@ -46,11 +46,11 @@ namespace ALC.IES.GestionAlmacen.Controllers {
             cls.DatosUtils.SetTerminales(models);
 
             //Si el terminal tenia algún pca asignado, al activar el terminal lo activamos en el pca.
-            if (models[terminal-1].PCAs!=null&& models[terminal - 1].PCAs.Count>0) {                 
+            if (models[terminal - 1].PCAs != null && models[terminal - 1].PCAs.Count > 0) {
                 List<cls.PCA> pcas = cls.DatosUtils.GetPCAs();
                 foreach (var pca in pcas) {
                     foreach (var pcaT in models[terminal - 1].PCAs) {
-                        if (pca.Id==pcaT.Id) {
+                        if (pca.Id == pcaT.Id) {
                             pca.Usuarios.Add(models[terminal - 1].NombreUsuario);
                         }
                     }
@@ -85,7 +85,41 @@ namespace ALC.IES.GestionAlmacen.Controllers {
             return Json(res);
         }
 
+        public JsonResult MovePCA2Terminal(int pca, int terminalOld, int terminalNew) {
+            DTO.DtoAjaxReturn res = new DTO.DtoAjaxReturn();
+            List<cls.PCA> pcaModels = cls.DatosUtils.GetPCAs();
+            cls.PCA pcaModel = pcaModels.FirstOrDefault(m => m.Id == pca);
 
+            List<cls.TerminalGestion> models = cls.DatosUtils.GetTerminales();
+            models[terminalNew - 1].PCAs.Add(pcaModel);
+
+            int index = models[terminalOld - 1].PCAs.IndexOf(models[terminalOld - 1].PCAs.First(m => m.Id == pcaModel.Id));
+
+            models[terminalOld - 1].PCAs.RemoveAt(index);
+            cls.DatosUtils.SetTerminales(models);
+
+            pcaModel.Usuarios.Add(models[terminalNew - 1].NombreUsuario);
+            cls.DatosUtils.SetPCAs(pcaModels);
+
+            Hubs.TerminalesHub hub = new Hubs.TerminalesHub();
+
+            String html = RenderViewToString("Almacen", "_pcaEnTerminal", pcaModel);
+            hub.MovePCA(pca, terminalOld, terminalNew, html);
+            res.Success = true;
+            return Json(res);
+        }
+
+
+        public JsonResult PickItemLinea(int id) {
+            DTO.DtoAjaxReturn res = new DTO.DtoAjaxReturn();
+            int idPCA;
+            if (cls.Linea.PickItem(id, out idPCA)) {
+                Hubs.TerminalesHub hub = new Hubs.TerminalesHub();
+                hub.RefreshPCAinTerminales(idPCA);
+                res.Success = true;
+            }
+            return Json(res);
+        }
 
         public JsonResult RestaurarDatosBase() {
             DTO.DtoAjaxReturn res = new DTO.DtoAjaxReturn(true);
@@ -104,23 +138,23 @@ namespace ALC.IES.GestionAlmacen.Controllers {
                 Usuarios = new List<string>() {
                               Models.UsuariosModel._Usuarios[4]
                           },
-                 Pickings = new List<cls.Picking>() 
+                Pickings = new List<cls.Picking>()
             };
 
             model1.Pickings.Add(new cls.Picking() {
-                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Nike"},
-                new cls.Linea(){ Cantidad=1, Producto="Sudadera ASICS"},
-                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"}
+                new cls.Linea(){ Id=153211, Cantidad=2, Producto="Zapatillas Nike"},
+                new cls.Linea(){ Id=153212,Cantidad=1, Producto="Sudadera ASICS"},
+                new cls.Linea(){ Id=153213,Cantidad=3, Producto="Calcetines adidas"}
             });
             model1.Pickings.Add(new cls.Picking() {
-                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Nike"},
-                new cls.Linea(){ Cantidad=1, Producto="Sudadera ASICS"},
-                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"}
+                new cls.Linea(){Id=153214, Cantidad=2, Producto="Zapatillas Nike"},
+                new cls.Linea(){Id=153215, Cantidad=1, Producto="Sudadera ASICS"},
+                new cls.Linea(){Id=153216, Cantidad=3, Producto="Calcetines adidas"}
             });
             model1.Pickings.Add(new cls.Picking() {
-                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Nike"},
-                new cls.Linea(){ Cantidad=1, Producto="Sudadera ASICS"},
-                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"}
+                new cls.Linea(){Id=153217, Cantidad=2, Producto="Zapatillas Nike"},
+                new cls.Linea(){Id=153218, Cantidad=1, Producto="Sudadera ASICS"},
+                new cls.Linea(){Id=153219, Cantidad=3, Producto="Calcetines adidas"}
             });
 
             pcaModels.Add(model1);
@@ -139,10 +173,10 @@ namespace ALC.IES.GestionAlmacen.Controllers {
                 Pickings = new List<cls.Picking>()
             };
             model2.Pickings.Add(new cls.Picking() {
-                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Padel ASICS"},
-                new cls.Linea(){ Cantidad=1, Producto="Sudadera NIKE"},
-                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"},
-                new cls.Linea(){ Cantidad=1, Producto="Gorra Under Armour"}
+                new cls.Linea(){ Id=153220, Cantidad=2, Producto="Zapatillas Padel ASICS"},
+                new cls.Linea(){ Id=153221,  Cantidad=1, Producto="Sudadera NIKE"},
+                new cls.Linea(){ Id=153222, Cantidad=3, Producto="Calcetines adidas"},
+                new cls.Linea(){ Id=153223, Cantidad=1, Producto="Gorra Under Armour"}
             });
 
             pcaModels.Add(model2);
@@ -159,10 +193,10 @@ namespace ALC.IES.GestionAlmacen.Controllers {
                 Pickings = new List<cls.Picking>()
             };
             model3.Pickings.Add(new cls.Picking() {
-                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Padel ASICS"},
-                new cls.Linea(){ Cantidad=1, Producto="Sudadera NIKE"},
-                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"},
-                new cls.Linea(){ Cantidad=1, Producto="Gorra Under Armour"}
+                new cls.Linea(){ Id=153230, Cantidad=2, Producto="Zapatillas Padel ASICS"},
+                new cls.Linea(){ Id=153231, Cantidad=1, Producto="Sudadera NIKE"},
+                new cls.Linea(){ Id=153232, Cantidad=3, Producto="Calcetines adidas"},
+                new cls.Linea(){ Id=153233, Cantidad=1, Producto="Gorra Under Armour"}
             });
             pcaModels.Add(model3);
 
@@ -178,10 +212,10 @@ namespace ALC.IES.GestionAlmacen.Controllers {
                 Pickings = new List<cls.Picking>()
             };
             model4.Pickings.Add(new cls.Picking() {
-                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Padel ASICS"},
-                new cls.Linea(){ Cantidad=1, Producto="Sudadera NIKE"},
-                new cls.Linea(){ Cantidad=3, Producto="Calcetines adidas"},
-                new cls.Linea(){ Cantidad=1, Producto="Gorra Under Armour"}
+                new cls.Linea(){ Id=153240, Cantidad=2, Producto="Zapatillas Padel ASICS"},
+                new cls.Linea(){ Id=153241, Cantidad=1, Producto="Sudadera NIKE"},
+                new cls.Linea(){ Id=153242, Cantidad=3, Producto="Calcetines adidas"},
+                new cls.Linea(){ Id=153243, Cantidad=1, Producto="Gorra Under Armour"}
             });
             pcaModels.Add(model4);
 
@@ -199,9 +233,9 @@ namespace ALC.IES.GestionAlmacen.Controllers {
                 Pickings = new List<cls.Picking>()
             };
             model5.Pickings.Add(new cls.Picking() {
-                new cls.Linea(){ Cantidad=2, Producto="Zapatillas Padel ASICS"},
-                new cls.Linea(){ Cantidad=1, Producto="Camiseta NIKE"},
-                new cls.Linea(){ Cantidad=3, Producto="Calcetines Trango"}
+                new cls.Linea(){ Id=153244,  Cantidad=2, Producto="Zapatillas Padel ASICS"},
+                new cls.Linea(){ Id=153245, Cantidad=1, Producto="Camiseta NIKE"},
+                new cls.Linea(){ Id=153246,  Cantidad=3, Producto="Calcetines Trango"}
             });
             pcaModels.Add(model5);
             cls.DatosUtils.SetPCAs(pcaModels);

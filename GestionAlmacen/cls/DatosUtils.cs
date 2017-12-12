@@ -26,6 +26,11 @@ namespace ALC.IES.GestionAlmacen.cls {
             return res;
         }
 
+        internal static PCA GetPCA(int id) {
+            List<cls.PCA> pcas = GetPCAs();
+            cls.PCA pca = pcas.FirstOrDefault(m => m.Id == id);
+            return pca;
+        }
 
         public static void SetPCAs(List<cls.PCA> model) {
             String path = HttpContext.Current.Server.MapPath(String.Format("~/App_Data/{0}", _pcasFileName));

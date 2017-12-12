@@ -13,16 +13,19 @@
     "Pickings": [
       [
         {
+          "Id": 153211,
           "Producto": "Zapatillas Nike",
           "Cantidad": 2,
           "Recogidos": 0
         },
         {
+          "Id": 153212,
           "Producto": "Sudadera ASICS",
           "Cantidad": 1,
           "Recogidos": 0
         },
         {
+          "Id": 153213,
           "Producto": "Calcetines adidas",
           "Cantidad": 3,
           "Recogidos": 0
@@ -30,16 +33,19 @@
       ],
       [
         {
+          "Id": 153214,
           "Producto": "Zapatillas Nike",
           "Cantidad": 2,
           "Recogidos": 0
         },
         {
+          "Id": 153215,
           "Producto": "Sudadera ASICS",
           "Cantidad": 1,
           "Recogidos": 0
         },
         {
+          "Id": 153216,
           "Producto": "Calcetines adidas",
           "Cantidad": 3,
           "Recogidos": 0
@@ -47,16 +53,19 @@
       ],
       [
         {
+          "Id": 153217,
           "Producto": "Zapatillas Nike",
           "Cantidad": 2,
           "Recogidos": 0
         },
         {
+          "Id": 153218,
           "Producto": "Sudadera ASICS",
           "Cantidad": 1,
           "Recogidos": 0
         },
         {
+          "Id": 153219,
           "Producto": "Calcetines adidas",
           "Cantidad": 3,
           "Recogidos": 0
@@ -73,26 +82,31 @@
     "Alarma": false,
     "CBLoMosca": true,
     "Usuarios": [
-      "Muñoz"
+      "Muñoz",
+      null
     ],
     "Pickings": [
       [
         {
+          "Id": 153220,
           "Producto": "Zapatillas Padel ASICS",
           "Cantidad": 2,
           "Recogidos": 0
         },
         {
+          "Id": 153221,
           "Producto": "Sudadera NIKE",
           "Cantidad": 1,
           "Recogidos": 0
         },
         {
+          "Id": 153222,
           "Producto": "Calcetines adidas",
           "Cantidad": 3,
           "Recogidos": 0
         },
         {
+          "Id": 153223,
           "Producto": "Gorra Under Armour",
           "Cantidad": 1,
           "Recogidos": 0
@@ -108,25 +122,31 @@
     "Escandallo": 985762,
     "Alarma": true,
     "CBLoMosca": true,
-    "Usuarios": [],
+    "Usuarios": [
+      null
+    ],
     "Pickings": [
       [
         {
+          "Id": 153230,
           "Producto": "Zapatillas Padel ASICS",
           "Cantidad": 2,
           "Recogidos": 0
         },
         {
+          "Id": 153231,
           "Producto": "Sudadera NIKE",
           "Cantidad": 1,
           "Recogidos": 0
         },
         {
+          "Id": 153232,
           "Producto": "Calcetines adidas",
           "Cantidad": 3,
           "Recogidos": 0
         },
         {
+          "Id": 153233,
           "Producto": "Gorra Under Armour",
           "Cantidad": 1,
           "Recogidos": 0
@@ -142,25 +162,31 @@
     "Escandallo": 568974,
     "Alarma": false,
     "CBLoMosca": false,
-    "Usuarios": [],
+    "Usuarios": [
+      null
+    ],
     "Pickings": [
       [
         {
+          "Id": 153240,
           "Producto": "Zapatillas Padel ASICS",
           "Cantidad": 2,
           "Recogidos": 0
         },
         {
+          "Id": 153241,
           "Producto": "Sudadera NIKE",
           "Cantidad": 1,
           "Recogidos": 0
         },
         {
+          "Id": 153242,
           "Producto": "Calcetines adidas",
           "Cantidad": 3,
           "Recogidos": 0
         },
         {
+          "Id": 153243,
           "Producto": "Gorra Under Armour",
           "Cantidad": 1,
           "Recogidos": 0
@@ -182,16 +208,19 @@
     "Pickings": [
       [
         {
+          "Id": 153244,
           "Producto": "Zapatillas Padel ASICS",
           "Cantidad": 2,
           "Recogidos": 0
         },
         {
+          "Id": 153245,
           "Producto": "Camiseta NIKE",
           "Cantidad": 1,
           "Recogidos": 0
         },
         {
+          "Id": 153246,
           "Producto": "Calcetines Trango",
           "Cantidad": 3,
           "Recogidos": 0

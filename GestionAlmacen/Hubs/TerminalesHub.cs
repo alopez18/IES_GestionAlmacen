@@ -28,10 +28,20 @@ namespace ALC.IES.GestionAlmacen.Hubs {
             //Clients.All.activarTerminal(idTerminal, usuario);
         }
 
+        internal void MovePCA(int idPCA, int terminalOld, int terminalNew, string model) {
+            var context = GlobalHost.ConnectionManager.GetHubContext<TerminalesHub>();
+            context.Clients.All.movePCA(idPCA, terminalOld,terminalNew, model);
 
+            //Clients.All.activarTerminal(idTerminal, usuario);
+        }
 
+        internal void RefreshPCAinTerminales(int idPCA) {
+            var context = GlobalHost.ConnectionManager.GetHubContext<TerminalesHub>();
+            context.Clients.All.refreshPCAinTerminales(idPCA);
 
+            //Clients.All.activarTerminal(idTerminal, usuario);
+        }
 
-
+        
     }//Class Finish
 }//Namespace Finish

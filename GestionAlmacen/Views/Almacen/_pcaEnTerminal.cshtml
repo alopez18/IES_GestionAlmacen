@@ -1,8 +1,8 @@
 ﻿@model ALC.IES.GestionAlmacen.cls.PCA
-@{ 
+@{
     Layout = "";
 }
-<div class="list-group-item ">
+<div @(Html.Raw(!Model.Completado() ? " draggable=\"true\" " : "")) class="list-group-item listDraggable pcaterminal@(Model.Id) @(Model.Completado()?" list-group-item-success ":"")" data-id="@Model.Id">
     <div class="media-box">
         <div class="media-box-body clearfix">
             <small class="pull-right">

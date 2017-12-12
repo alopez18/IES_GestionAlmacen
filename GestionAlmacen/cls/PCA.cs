@@ -36,6 +36,16 @@ namespace ALC.IES.GestionAlmacen.cls {
             return res;
         }
 
+        public bool Completado() {
+            bool res = true;
+            foreach (var item in this.Pickings) {
+                if (!item.Completado()) {
+                    res = false;
+                    break;
+                }
+            }
+            return res;
+        }
 
         public int GetNumLineasCompletadas() {
             int res = 0;
@@ -54,7 +64,6 @@ namespace ALC.IES.GestionAlmacen.cls {
     }//Class Finish
 
     public class Picking : List<Linea> {
-
 
         public Picking() {
 
@@ -88,6 +97,7 @@ namespace ALC.IES.GestionAlmacen.cls {
 
 
     public class Linea {
+        public int Id { get; set; }
         public String Producto { get; set; }
         public int Cantidad { get; set; }
         public int Recogidos { get; set; }
@@ -100,6 +110,34 @@ namespace ALC.IES.GestionAlmacen.cls {
         public Boolean Completado() {
             return (Recogidos >= Cantidad);
         }
-    }//Class Finish
 
+        internal static bool PickItem(int id, out int idPCA) {
+            bool res = false;
+            idPCA = -1;
+            List<cls.PCA> pcas = cls.DatosUtils.GetPCAs();
+            foreach (var pca in pcas) {
+                foreach (var picking in pca.Pickings) {
+                    foreach (var linea in picking) {
+                        if (linea.Id == id) {
+                            idPCA = pca.Id;
+                            if (linea.Recogidos<linea.Cantidad) {
+                                ++linea.Recogidos;
+                                cls.DatosUtils.SetPCAs(pcas);
+                                res = true;
+                                break;
+                            }                            
+                        }
+                    }
+                    if (res) break;
+                }
+            }
+            return res;
+        }
+
+
+
+
+
+
+    }//Class Finish
 }//Namespace Finish

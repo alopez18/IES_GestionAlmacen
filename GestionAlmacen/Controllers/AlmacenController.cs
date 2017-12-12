@@ -22,5 +22,12 @@ namespace ALC.IES.GestionAlmacen.Controllers {
             List<cls.PCA> model = cls.DatosUtils.GetPCAs();
             return View("_cuerpoTablaPCAs", model);
         }
+
+
+        public ActionResult GetPCAenTerminal(int id) {
+            cls.PCA pca = cls.DatosUtils.GetPCA(id);
+            return View("_pcaEnTerminal", pca);
+        }
+
     }//Class Finish
 }//namespace Finish
